@@ -1,0 +1,179 @@
+# See https://peps.python.org/pep-0621/
+
+[project]
+name = 'turing_display'
+description = 'Library to use the cheap 3.5"/5.0"/8.0" USB displays.'
+readme = 'README.md'
+license = { file = 'LICENSE' }
+requires-python = ">=3.12.6"
+authors = [
+    { name = 'Dieter Vansteenwegen', email = 'github@vansteenwegen.org' },
+]
+dynamic = ['version']
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Programming Language :: Python',
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Operating System :: POSIX :: Linux",
+]
+
+keywords = ['turing', 'display']
+# version = 'v0.0.0'
+
+dependencies = []
+
+[project.urls]
+Homepage = 'https://boxfish.be'
+Repository = 'https://github.com/dietervansteenwegen/turing_display.git'
+Changelog = 'https://github.com/dietervansteenwegen/turing_display/blob/master/CHANGELOG.md'
+# Documentation = 'https://readthedocs.org'
+
+# [project.scripts]
+# turing_test_display = 'turing_display.__main__:run'
+
+[build-system]
+requires = ['hatchling', 'versioningit']
+build-backend = 'hatchling.build'
+
+[tool.uv]
+dev-dependencies = [
+    # "turing_display",
+    "pre-commit>=4.1.0",
+    "deptry>=0.22.0",
+    "ruff>=0.9.6",
+    "vulture>=2.14",
+    "sphinx>=8.2.1",
+    "sphinx-rtd-theme>=3.0.2",
+    "sphinxcontrib-napoleon>=0.7",
+    "recommonmark>=0.7.1",
+    "sphinx-copybutton>=0.5.2",
+    "sphinx-toggleprompt>=0.6.0",
+    "myst-parser>=4.0.1",
+    "versioningit>=3.3.0",
+]
+package = true
+
+[tool.uv.pip]
+generate-hashes = true
+
+[tool.uv.sources]
+turing_display = { workspace = true }
+
+[tool.hatch]
+[tool.hatch.version]
+source = 'versioningit'
+
+[tool.versioningit]
+[tool.versioningit.vcs]
+match = ['v*']
+default-tag = 'v0.0.0'
+
+[tool.versioningit.write]
+file = 'src/turing_display/__version__.py'
+
+[tool.versioningit.format]
+distance = "v{base_version}.post{distance}+{vcs}{rev}"
+dirty = "v{base_version}+d{build_date:%Y%m%d}"
+distance-dirty = "v{base_version}.post{distance}+{vcs}{rev}.d{build_date:%Y%m%d}"
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "docs",
+]
+target-version = "py310"
+line-length = 100
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    # Pycodestyle errors
+    "E",
+    # Pycodestyle warnings
+    "W",
+    # Pyflakes
+    "F",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # McCabe complex structure
+    "C901",
+    # PEP8 Naming
+    "N",
+    # Flake8-Bandit
+    "S",
+    # Flake8-builtins
+    "A",
+    # Flake8-commas
+    "COM",
+    # Flake8-datetimez
+    "DTZ",
+    # Flake8-errmsg
+    "EM",
+    # Flake8-use-pathlib
+    "PTH",
+    # tryceratops
+    "TRY",
+]
+
+ignore = [
+    # Use logging.exception instead of logging.error
+    "TRY400",
+    # Raising and catching exceptions in the same block may lead to confusion
+    "TRY301",
+    # Do not run missing-trailing-comma together with formatter (see https://docs.astral.sh/ruff/rules/missing-trailing-comma/#formatter-compatibility)
+    "COM812",
+
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# "docs/conf.py" = ["D100", "D101", "D105"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+exclude = ["*.pyi"]
+
+[tool.vulture]
+exclude = []
+ignore_names = ['args', 'kwargs']
+min_confidence = 60
+paths = ['./src']
+# ignore_decorators = ["@app.route", "@require_*"]
+# make_whitelist = true
+# sort_by_size = true
+# verbose = true

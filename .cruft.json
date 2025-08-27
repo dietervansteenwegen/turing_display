@@ -1,0 +1,24 @@
+{
+  "template": "git_prive:dietervansteenwegen/python_cookie.git",
+  "commit": "d73a293d218baf53bce91365a6f8c9d7027f0fea",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "Turing display driver",
+      "project_name_short": "turing_display",
+      "project_link": "https://www.boxfish.be",
+      "module_name": "turing_display",
+      "class_name": "TuringDisplay",
+      "project_description": "Library to use the cheap 3.5\"/5.0\"/8.0\" USB displays.",
+      "keywords": "'turing', 'display'",
+      "use_config_file": false,
+      "add_documentation": true,
+      "add_gui": false,
+      "create_assets_dir": true,
+      "create_env_template": false,
+      "_template": "git_prive:dietervansteenwegen/python_cookie.git",
+      "_commit": "d73a293d218baf53bce91365a6f8c9d7027f0fea"
+    }
+  },
+  "directory": null
+}
