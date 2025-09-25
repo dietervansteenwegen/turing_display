@@ -13,7 +13,7 @@ dynamic = ['version']
 classifiers = [
     'Development Status :: 4 - Beta',
     'Programming Language :: Python',
-    "Environment :: Console",
+    # "Environment :: Console",
     "Intended Audience :: Developers",
     "Operating System :: Microsoft :: Windows :: Windows 10",
     "Operating System :: Microsoft :: Windows :: Windows 11",
@@ -23,10 +23,7 @@ classifiers = [
 keywords = ['turing', 'display']
 # version = 'v0.0.0'
 
-dependencies = [
-    "pillow>=11.3.0",
-    "pyserial>=3.5",
-]
+dependencies = ["pillow>=11.3.0", "pyserial>=3.5"]
 
 [project.urls]
 Homepage = 'https://boxfish.be'
