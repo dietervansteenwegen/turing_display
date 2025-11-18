@@ -18,19 +18,16 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
+import queue
 import time
 from enum import Enum, IntEnum
-from typing import TYPE_CHECKING, Optional, Union
+from typing import Optional
 
+from PIL import Image
 from serial.tools.list_ports import comports
 
 from turing_display.lcd.lcd_comm_base import LcdBase, Orientation
-from turing_display.lcd.serialize import chunked, image_to_RGB565
-
-if TYPE_CHECKING:
-    import queue
-
-    from PIL import Image
+from turing_display.lcd.serialize_image import image_to_RGB565, serialized_chunk
 
 log = logging.getLogger('turing_display')
 
@@ -68,7 +65,7 @@ class LcdCommRevA(LcdBase):
         com_port: str = 'AUTO',
         display_width: int = 320,
         display_height: int = 480,
-        update_queue: Optional[Union[queue.Queue, None]] = None,
+        update_queue: Optional[queue.Queue] = None,
     ):
         log.debug('HW revision: A')
         LcdBase.__init__(self, com_port, display_width, display_height, update_queue)
@@ -241,5 +238,5 @@ class LcdCommRevA(LcdBase):
         # Lock queue mutex then queue all the requests for the image data
         with self.update_queue_mutex:
             # Send image data by multiple of "display width" bytes
-            for chunk in chunked(rgb565le, width * 8):
+            for chunk in serialized_chunk(rgb565le, width * 8):
                 self.send_line(chunk)

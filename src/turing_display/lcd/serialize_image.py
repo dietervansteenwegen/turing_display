@@ -4,12 +4,10 @@ import numpy as np
 import numpy.typing as npt
 from PIL import Image
 
-from turing_display.lcd.exceptions import InvalidImageError
-
 # ruff: noqa: N802 # RGB565/BGR/BGRA are abreviations so should be capitalized
 
 
-def chunk(data: bytes, chunk_size: int) -> Iterator[bytes]:
+def serialized_chunk(data: bytes, chunk_size: int) -> Iterator[bytes]:
     for i in range(0, len(data), chunk_size):
         yield data[i : i + chunk_size]
 

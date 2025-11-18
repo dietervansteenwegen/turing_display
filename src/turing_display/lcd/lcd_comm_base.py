@@ -272,8 +272,9 @@ class LcdBase(ABC):
         if x >= self.display_width or y >= self.get_height():
             err_msg = 'X and Y coordinates must be within the display.'
             raise LcdInvalidParameterError(err_msg)
-        if x + width >= self.get_width() or y + height >= self.get_height():
+        if x + width > self.get_width() or y + height > self.get_height():
             err_msg = 'Object doesn´t fit on display.'
+            breakpoint()
             raise LcdInvalidParameterError(err_msg)
 
     def _check_in_boundaries(self, x: int, y: int):
@@ -511,7 +512,12 @@ class LcdBase(ABC):
 
             text = f'{int(min_value)}'
             _, top, right, bottom = ttfont.getbbox(text)
-            draw.text((width - 1 - right, height - 2 - bottom), text, font=ttfont, fill=axis_color)
+            draw.text(
+                (width - 1 - right, height - 2 - bottom),
+                text,
+                font=ttfont,
+                fill=axis_color,
+            )
 
         self.display_pil_image(graph_image, x, y)
 
@@ -537,7 +543,12 @@ class LcdBase(ABC):
         else:
             y_f = math.floor(y_f + 0.5)
         draw.ellipse(
-            [x_f - width / 2, y_f - width / 2, x_f + width / 2, y_f - 1 + width / 2 - 1],
+            [
+                x_f - width / 2,
+                y_f - width / 2,
+                x_f + width / 2,
+                y_f - 1 + width / 2 - 1,
+            ],
             outline=color,
             fill=color,
             width=1,
@@ -665,7 +676,11 @@ class LcdBase(ABC):
                     color=bar_background_color,
                 )
                 self.draw_radial_decoration(
-                    draw=draw, angle=angle_start, radius=radius, width=bar_width, color=bar_color
+                    draw=draw,
+                    angle=angle_start,
+                    radius=radius,
+                    width=bar_width,
+                    color=bar_color,
                 )
                 self.draw_radial_decoration(
                     draw=draw,
@@ -744,7 +759,11 @@ class LcdBase(ABC):
                     color=bar_background_color,
                 )
                 self.draw_radial_decoration(
-                    draw=draw, angle=angle_start, radius=radius, width=bar_width, color=bar_color
+                    draw=draw,
+                    angle=angle_start,
+                    radius=radius,
+                    width=bar_width,
+                    color=bar_color,
                 )
                 self.draw_radial_decoration(
                     draw=draw,
@@ -800,7 +819,10 @@ class LcdBase(ABC):
             left, top, right, bottom = ttfont.getbbox(text)
             w, h = right - left, bottom - top
             draw.text(
-                (radius - w / 2 + text_offset[0], radius - top - h / 2 + text_offset[1]),
+                (
+                    radius - w / 2 + text_offset[0],
+                    radius - top - h / 2 + text_offset[1],
+                ),
                 text,
                 font=ttfont,
                 fill=font_color,

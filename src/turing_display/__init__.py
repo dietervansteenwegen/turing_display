@@ -7,4 +7,5 @@ __author__ = 'Dieter Vansteenwegen'
 __project__ = 'Turing display driver'
 __project_link__ = 'https://www.boxfish.be'
 
+from .__version__ import __version__  # noqa: F401
 from .turing_display import TuringDisplay  # noqa: F401
