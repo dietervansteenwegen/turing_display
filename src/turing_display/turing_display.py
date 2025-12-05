@@ -10,10 +10,10 @@ import logging
 import queue
 from typing import Optional
 
-from turing_display.__version__ import __version__
-from turing_display.lcd.lcd_comm_base import Orientation
-from turing_display.lcd.lcd_comm_rev_a import LcdCommRevA
-from turing_display.resources import get_data_path
+from .__version__ import __version__
+from .lcd.lcd_comm_base import Orientation
+from .lcd.lcd_comm_rev_a import LcdCommRevA
+from .resources import get_data_path
 
 log = logging.getLogger('turing_display')
 

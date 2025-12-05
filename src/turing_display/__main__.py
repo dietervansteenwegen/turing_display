@@ -7,7 +7,7 @@ __author__ = 'Dieter Vansteenwegen'
 __project__ = 'Turing display driver'
 __project_link__ = 'https://www.boxfish.be'
 
-from . import TuringDisplay  # noqa: F401
+from .turing_display import TuringDisplay  # noqa: F401
 
 
 def test_display():
