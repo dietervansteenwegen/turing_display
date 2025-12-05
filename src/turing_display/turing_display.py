@@ -59,13 +59,9 @@ class TuringDisplay:
             self.lcd.set_brightness(brightness)
         if display_test_pattern:
             self.display_test_pattern()
-        # self.lcd.set_backplate_led_color(
-        # config.THEME_DATA['display'].get('DISPLAY_RGB_LED', (255, 255, 255))
-        # )
 
     def turn_off(self):
         self.lcd.screen_off()
-        # self.lcd.set_backplate_led_color(led_color=(0, 0, 0))  # TODO, check supported for all
 
     def display_test_pattern(self):
         fn = get_data_path('test_pattern_480x320.png')
@@ -86,31 +82,3 @@ class TuringDisplay:
             align='center',
             anchor='mm',
         )
-
-    # def display_static_text(self):
-    #     if config.THEME_DATA.get('static_text', False):
-    #         for text in config.THEME_DATA['static_text']:
-    #             log.debug(f'Drawing Text: {text}')
-    #             self.lcd.display_text(
-    #                 text=config.THEME_DATA['static_text'][text].get('TEXT'),
-    #                 x=config.THEME_DATA['static_text'][text].get('X', 0),
-    #                 y=config.THEME_DATA['static_text'][text].get('Y', 0),
-    #                 width=config.THEME_DATA['static_text'][text].get('WIDTH', 0),
-    #                 height=config.THEME_DATA['static_text'][text].get('HEIGHT', 0),
-    #                 font=config.FONTS_DIR
-    #                 + config.THEME_DATA['static_text'][text].get(
-    #                     'FONT', 'roboto-mono/RobotoMono-Regular.ttf'
-    #                 ),
-    #                 font_size=config.THEME_DATA['static_text'][text].get('FONT_SIZE', 10),
-    #                 font_color=config.THEME_DATA['static_text'][text].get('FONT_COLOR',
-    # (0, 0, 0)),
-    #                 background_color=config.THEME_DATA['static_text'][text].get(
-    #                     'BACKGROUND_COLOR', (255, 255, 255)
-    #                 ),
-    #                 background_image=_get_full_path(
-    #                     config.THEME_DATA['PATH'],
-    #                     config.THEME_DATA['static_text'][text].get('BACKGROUND_IMAGE', None),
-    #                 ),
-    #                 align=config.THEME_DATA['static_text'][text].get('ALIGN', 'left'),
-    #                 anchor=config.THEME_DATA['static_text'][text].get('ANCHOR', 'lt'),
-    #             )
