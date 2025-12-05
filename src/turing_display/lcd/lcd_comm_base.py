@@ -36,6 +36,8 @@ from PIL import Image, ImageDraw, ImageFont
 from turing_display.lcd.color import Color, parse_color
 from turing_display.lcd.exceptions import LcdInvalidParameterError, LcdNotConnectedError
 
+from ..resources import get_data_path
+
 log = logging.getLogger('turing_display')
 
 
@@ -292,7 +294,7 @@ class LcdBase(ABC):
         y: int = 0,
         width: int = 0,
         height: int = 0,
-        font: str = './res/fonts/roboto-mono/RobotoMono-Regular.ttf',
+        font: str = get_data_path('RobotoMono-Regular.ttf'),
         font_size: int = 20,
         font_color: Color = (0, 0, 0),
         background_color: Color = (255, 255, 255),
@@ -307,7 +309,7 @@ class LcdBase(ABC):
         background_color = parse_color(background_color)
         self._check_in_boundaries(x, y)
 
-        if len(text) > 0:
+        if len(text) == 0:
             err_msg = 'Text must not be empty'
             raise LcdInvalidParameterError(err_msg)
         if font_size <= 0:

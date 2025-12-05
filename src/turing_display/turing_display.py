@@ -77,8 +77,8 @@ class TuringDisplay:
             width=self._width,
             height=self._height,
             font_size=24,
-            font_color=(255, 0, 0),
-            background_color=(0, 0, 0),
+            font_color=(255, 255, 255),
+            background_color=(100, 100, 100),
             align='center',
             anchor='mm',
         )
