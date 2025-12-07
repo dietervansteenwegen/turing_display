@@ -2,8 +2,4 @@
 
 ## Not released yet
 
--
-
-## v0.1.0
-
-- Initial release
+- feat: Use packaged Roboto-Light as fallback font

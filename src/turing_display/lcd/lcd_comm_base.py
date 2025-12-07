@@ -21,6 +21,7 @@ import copy
 import logging
 import math
 import os
+import pathlib
 import platform
 import queue
 import sys
@@ -28,15 +29,13 @@ import threading
 import time
 from abc import ABC, abstractmethod
 from enum import IntEnum
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, Union
 
 import serial
 from PIL import Image, ImageDraw, ImageFont
 
 from turing_display.lcd.color import Color, parse_color
 from turing_display.lcd.exceptions import LcdInvalidParameterError, LcdNotConnectedError
-
-from ..resources import get_data_path
 
 log = logging.getLogger('turing_display')
 
@@ -294,7 +293,9 @@ class LcdBase(ABC):
         y: int = 0,
         width: int = 0,
         height: int = 0,
-        font: str = get_data_path('RobotoMono-Regular.ttf'),
+        font: Optional[Union[str, pathlib.Path]] = None,  # don't use `if not font` bc this will
+        # silently use the included font if user passes "" where we want to signal that is an
+        # invalid font resource
         font_size: int = 20,
         font_color: Color = (0, 0, 0),
         background_color: Color = (255, 255, 255),
@@ -304,6 +305,13 @@ class LcdBase(ABC):
     ):
         # Convert text to bitmap using PIL and display it
         # Provide the background image path to display text with transparent background
+        # If no font is provided, use the bundled RobotoMono-Regular.ttf
+
+        if font is None:
+            from turing_display.resources import get_data_path
+
+            font = str(get_data_path('Roboto-Light.ttf'))
+            # font = str(get_data_path('RobotoMono-Regular.ttf'))
 
         font_color = parse_color(font_color)
         background_color = parse_color(background_color)
